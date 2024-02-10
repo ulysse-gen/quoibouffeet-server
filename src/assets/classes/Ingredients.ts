@@ -41,7 +41,6 @@ function TypesFromDB(IngredientData: QuoiBouffeEt.IngredientData): Array<Type> {
             if (typeof Types[0] == "object")Types = Types.map((TypeData: any) => new Type(TypeData));
         }
     } catch(e) {
-        console.log(e)
         return [];
     }
     return (Types as Array<Type>).filter(type => type.id && type.name && type.slug);

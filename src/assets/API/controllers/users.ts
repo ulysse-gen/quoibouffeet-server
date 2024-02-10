@@ -13,7 +13,7 @@ export async function patchUser(req: express.Request, res: express.Response) {
         missing: 'username'
     });
 
-    return res.status(200).json({targetUsername, username, email});
+    return res.status(500).send('Not implemented');
 }
 
 export async function getUser(req: express.Request, res: express.Response) {

@@ -49,7 +49,6 @@ function IngredientsFromDB(RecipeData: QuoiBouffeEt.RecipeData): Array<Ingredien
             if (typeof Ingredients[0] == "object")Ingredients = Ingredients.map((IngredientData: any) => new Ingredient(IngredientData));
         }
     } catch(e) {
-        console.log(e)
         return [];
     }
     return (Ingredients as Array<Ingredient>).filter(ingredient => ingredient.id && ingredient.name && ingredient.slug);

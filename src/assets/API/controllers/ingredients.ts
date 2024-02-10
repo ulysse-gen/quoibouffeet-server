@@ -73,7 +73,7 @@ export async function patchIngredient(req: express.Request, res: express.Respons
         missing: 'ingredient'
     });
 
-    return res.status(200).json({ingredient});
+    return res.status(500).send('Not implemented');
 }
 
 export async function getIngredient(req: express.Request, res: express.Response) {

@@ -53,7 +53,7 @@ export async function patchType(req: express.Request, res: express.Response) {
         missing: 'type'
     });
 
-    return res.status(200).json({type});
+    return res.status(500).send('Not implemented');
 }
 
 export async function getType(req: express.Request, res: express.Response) {

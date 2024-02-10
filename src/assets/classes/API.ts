@@ -48,7 +48,7 @@ export default class API {
         this.HTTPServer = http.createServer(this.Router);
         return new Promise((res, _rej) => {
             this.HTTPServer.listen(process.env.API_PORT || 669, () => {
-                res(console.log(`API Server listenning on port ${process.env.API_PORT || 669}`));
+                res(console.log(`[${moment().format('DD/MM/YYYY HH:mm:ss')}] API Server listenning on port ${process.env.API_PORT || 669}`));
             })
         });
     }
