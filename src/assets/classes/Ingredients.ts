@@ -1,5 +1,6 @@
 import _ from "lodash";
 import Type from "./Types";
+import Unit from "./Units";
 
 export default class Ingredient {
     public id: string;
@@ -8,6 +9,8 @@ export default class Ingredient {
     public description: string;
     public image: string;
     public types: Array<Type>;
+    public quantity?: number;
+    public unit?: Unit;
     constructor(IngredientData: QuoiBouffeEt.IngredientData) {
         this.id = IngredientData.id;
         this.name = IngredientData.name;
@@ -15,6 +18,8 @@ export default class Ingredient {
         this.description = IngredientData.description;
         this.image = IngredientData.image;
         this.types = TypesFromDB(IngredientData);
+        if (IngredientData.quantity)this.quantity = IngredientData.quantity;
+        if (IngredientData.unit)this.unit = new Unit(IngredientData.unit);
     }
 
     get clientVersion() {

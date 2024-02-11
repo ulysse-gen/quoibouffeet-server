@@ -1,6 +1,7 @@
 import _ from "lodash";
 import Ingredient from "./Ingredients";
 import Type from "./Types";
+import Step from "./Steps";
 
 export default class Recipe {
     public id: string;
@@ -9,7 +10,9 @@ export default class Recipe {
     public description: string;
     public preparationTime: number;
     public ingredients: Array<Ingredient>;
+    public steps: Array<Step>;
     public types: Array<Type>;
+    public image: string;
     constructor(RecipeData: QuoiBouffeEt.RecipeData) {
         this.id = RecipeData.id;
         this.name = RecipeData.name;
@@ -17,7 +20,9 @@ export default class Recipe {
         this.description = RecipeData.description;
         this.preparationTime = RecipeData.preparationTime;
         this.ingredients = IngredientsFromDB(RecipeData);
+        this.steps = StepsFromDB(RecipeData);
         this.types = this._types;
+        this.image = RecipeData.image;
     }
 
     get clientVersion() {
@@ -52,4 +57,22 @@ function IngredientsFromDB(RecipeData: QuoiBouffeEt.RecipeData): Array<Ingredien
         return [];
     }
     return (Ingredients as Array<Ingredient>).filter(ingredient => ingredient.id && ingredient.name && ingredient.slug);
+}
+
+function StepsFromDB(StepData: QuoiBouffeEt.RecipeData): Array<any> {
+    var Steps: string | Array<any> | Array<String> = StepData.steps;
+    try {
+        if (typeof Steps == "string") {
+            Steps = JSON.parse(Steps);
+        }
+        if (Array.isArray(Steps)){
+            if (Steps.length == 0)return [];
+            if (Steps[0] instanceof Ingredient)return Steps as Array<Type>;
+            if (typeof Steps[0] == "string")Steps = Steps.map((Step: any) => JSON.parse(Step));
+            if (typeof Steps[0] == "object")Steps = Steps.map((StepData: any) => new Step(StepData));
+        }
+    } catch(e) {
+        return [];
+    }
+    return (Steps as Array<Type>).filter(step => step.id && step.description);
 }

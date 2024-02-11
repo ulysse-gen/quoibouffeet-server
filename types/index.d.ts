@@ -38,6 +38,21 @@ declare global {
       description: string;
     }
 
+    interface UnitData {
+      id: string;
+      name: string;
+      slug: string;
+      short: string;
+    }
+
+    interface StepData {
+      id: string;
+      name: string;
+      description: string;
+      image: string;
+      stepTime: string;
+    }
+
     interface IngredientData {
       id: string;
       name: string;
@@ -45,6 +60,8 @@ declare global {
       description: string;
       types: string;
       image: string;
+      quantity?: number;
+      unit?: UnitData;
     }
 
     interface RecipeData {
@@ -55,6 +72,8 @@ declare global {
       ingredients: string;
       preparationTime: number;
       ingredients: string;
+      steps: string;
+      image: string;
     }
   }
 }

@@ -1,6 +1,7 @@
 import http from "http";
 import express, { Express } from "express";
 import jwt, { JsonWebTokenError } from "jsonwebtoken";
+import cors from "cors";
 
 import MainRoutes from "../API/routes";
 import User from "./User";
@@ -25,11 +26,14 @@ export default class API {
         this.Router = express();
         this.Router.use(express.urlencoded({extended: true}));
         this.Router.use(express.json());
+        this.Router.use(cors({
+            optionsSuccessStatus: 200
+        }));
 
         this.Router.use((req, res, next) => {
             res.header('Access-Control-Allow-Origin', '*');
             if (req.method === 'OPTIONS') {
-                res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+                res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, PATCH');
                 return res.status(200).json({});
             }
             req.API = this;
