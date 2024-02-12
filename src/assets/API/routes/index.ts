@@ -7,6 +7,7 @@ import usersRoutes from './users';
 import ingredientsRoutes from './ingredients';
 import typesRoutes from './types';
 import recipesRoutes from './recipes';
+import unitsRoutes from './units';
 
 router.get('/', async (req: express.Request, res: express.Response) => {
     res.status(404).json({
@@ -18,5 +19,6 @@ router.use('/users', usersRoutes);
 router.use('/ingredients', ingredientsRoutes);
 router.use('/types', typesRoutes);
 router.use('/recipes', recipesRoutes);
+router.use('/units', unitsRoutes);
 
 export default router;
